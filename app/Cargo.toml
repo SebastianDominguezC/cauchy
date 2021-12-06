@@ -1,0 +1,34 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2018"
+authors = ["Sebastián Domínguez Calderón <hector0193@gmail.com>"]
+description = "A complex number calculator"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+num-complex = "0.4"
+iced = { path = "../", features = ["canvas", "tokio", "debug"] }
+iced_native = { path = "../native" }
+
+
+
+[package.metadata.bundle.example.cauchy]
+name = "Cauchy"
+identifier = "com.testing.cauchy"
+icon = ["logo.png"]
+category = "Utility"
+short_description = "An example of a bundled application"
+long_description = """
+A trivial application that just displays a blank window with
+a title bar.  It serves as an example of an application that
+can be bundled with cargo-bundle, as well as a test-case for
+cargo-bundle's support for bundling crate examples.
+"""
+osx_minimum_system_version = "10.11"
+osx_frameworks = []
+
+[[example]]
+name = "cauchy"
+path = "src/main.rs"
