@@ -1,5 +1,6 @@
 mod calculator;
 mod calculus;
+mod fractals;
 mod grapher;
 mod parser;
 
@@ -8,6 +9,9 @@ use calculator::{
 };
 use calculus::{
     process_calculus_message, render_calculus, CalculusMessage, CalculusState,
+};
+use fractals::{
+    process_fractals_message, render_fractals, FractalsMessage, FractalsState,
 };
 use grapher::{
     process_grapher_message, render_grapher, GrapherMessage, GrapherState,
@@ -31,6 +35,7 @@ pub struct ComplexApp {
     pub calculator: CalculatorState,
     pub grapher: GrapherState,
     pub calculus: CalculusState,
+    pub fractals: FractalsState,
     window: Window,
 }
 
@@ -39,6 +44,7 @@ pub enum Message {
     Calculator(CalcMessage),
     Grapher(GrapherMessage),
     Calculus(CalculusMessage),
+    Fractals(FractalsMessage),
     Menu(Window),
 }
 
@@ -47,6 +53,7 @@ pub enum Window {
     Calculator,
     Grapher,
     Calculus,
+    Fractals,
 }
 
 impl Default for Window {
@@ -91,6 +98,11 @@ impl Application for ComplexApp {
                         Hotkey::new(alt, KeyCode::F4),
                         Message::Menu(Window::Calculus),
                     ),
+                    menu::Entry::item(
+                        "Fractals",
+                        Hotkey::new(alt, KeyCode::F5),
+                        Message::Menu(Window::Fractals),
+                    ),
                 ]),
             ),
             menu::Entry::dropdown("Options", Menu::with_entries(vec![])),
@@ -112,6 +124,9 @@ impl Application for ComplexApp {
             Message::Calculus(m) => {
                 process_calculus_message(self, m);
             }
+            Message::Fractals(m) => {
+                process_fractals_message(self, m);
+            }
             Message::Menu(v) => {
                 self.window = v;
             }
@@ -124,6 +139,7 @@ impl Application for ComplexApp {
             Window::Calculator => render_calculator(self),
             Window::Grapher => render_grapher(self),
             Window::Calculus => render_calculus(self),
+            Window::Fractals => render_fractals(self),
         }
     }
 }
