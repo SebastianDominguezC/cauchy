@@ -1,5 +1,7 @@
 # Cauchy
 
+[![Example](./archive/showcase.gif)](./archive/showcase.mp4)
+
 Complex Number application for
 
 - Basic calculations
